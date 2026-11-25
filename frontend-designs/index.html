@@ -78,13 +78,25 @@
     Don't have an account?
     <a href="#" id="switch-link">Create one</a>
 </p>
-
+         <p id="auth-message"></p>
+   
         </section>
 
     </main>
 
-<script>
+<script type="module">
 
+    // Import Firebase authentication
+    import { auth } from "./firebase-config.js";
+
+    import {
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        updateProfile
+    } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+
+    // Get the login and signup forms
     const loginForm = document.getElementById("login-form");
     const signupForm = document.getElementById("signup-form");
 
@@ -92,23 +104,22 @@
     const formSubtitle = document.getElementById("form-subtitle");
 
     const switchText = document.getElementById("switch-text");
+    const authMessage = document.getElementById("auth-message");
 
+
+    // Switch between login and signup forms
     switchText.addEventListener("click", function(event) {
 
         if (event.target.tagName !== "A") return;
 
         event.preventDefault();
-        const authCard = document.querySelector(".auth-card");
-
-        authCard.classList.remove("form-transition");
-
-        // Restart the animation
-        void authCard.offsetWidth;
 
         const isLoginVisible = !loginForm.hidden;
 
         loginForm.hidden = isLoginVisible;
         signupForm.hidden = !isLoginVisible;
+
+        authMessage.textContent = "";
 
         if (isLoginVisible) {
 
@@ -129,10 +140,87 @@
                 'Don\'t have an account? <a href="#">Create one</a>';
 
         }
-        authCard.classList.add("form-transition");
 
     });
 
+
+    // LOGIN: Run when the user clicks Sign in
+    loginForm.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+
+        const password = document.getElementById("password").value;
+
+        authMessage.textContent = "Signing in...";
+
+        try {
+
+            // Check the user's email and password
+            await signInWithEmailAndPassword(auth, email, password);
+
+            authMessage.textContent = "Login successful!";
+
+            // We will connect your home page next
+
+        } catch (error) {
+
+            authMessage.textContent =
+                "Login failed. Please check your email and password.";
+
+            console.error(error);
+
+        }
+
+    });
+
+
+    // SIGNUP: Run when the user clicks Create account
+    signupForm.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const fullname = document.getElementById("fullname").value.trim();
+
+        const email = document.getElementById("signup-email").value.trim();
+
+        const password = document.getElementById("signup-password").value;
+
+        authMessage.textContent = "Creating your account...";
+
+        try {
+
+            // Create a new account in Firebase
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            // Save the user's name in their Firebase profile
+            await updateProfile(userCredential.user, {
+                displayName: fullname
+            });
+
+            authMessage.textContent =
+                "Account created successfully!";
+
+            console.log("New user:", userCredential.user.email);
+
+        } catch (error) {
+
+            authMessage.textContent =
+                "Signup failed. Please try again.";
+
+            console.error(error);
+
+        }
+
+    });
+
+
+    
 </script>
 
 </body>
