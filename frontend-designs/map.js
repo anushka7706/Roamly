@@ -61,3 +61,66 @@ if (button) {
     });
   });
 }
+
+const searchBtn = document.getElementById("search-btn");
+const cityInput = document.getElementById("city-input");
+
+if (searchBtn) {
+    searchBtn.addEventListener("click", searchLocation);
+}
+
+if (cityInput) {
+    cityInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            searchLocation();
+        }
+    });
+}
+
+async function searchLocation() {
+    const city = cityInput.value.trim();
+
+    if (!city) {
+        setStatus("Please enter a city or location.");
+        return;
+    }
+
+    setStatus("Searching for " + city + "...");
+
+    try {
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`;
+
+        const response = await fetch(url);
+        const results = await response.json();
+
+        if (results.length === 0) {
+            setStatus("Location not found. Try another name.");
+            return;
+        }
+
+        const place = results[0];
+        const lat = Number(place.lat);
+        const lng = Number(place.lon);
+
+        map.flyTo([lat, lng], 14);
+
+        if (marker) {
+            marker.setLatLng([lat, lng]);
+        } else {
+            marker = L.marker([lat, lng]).addTo(map);
+        }
+
+        marker.bindPopup(place.display_name).openPopup();
+
+        if (circle) {
+            map.removeLayer(circle);
+            circle = null;
+        }
+
+        setStatus("Showing results for " + place.display_name);
+
+    } catch (error) {
+        console.error(error);
+        setStatus("Could not search location. Please try again.");
+    }
+}
