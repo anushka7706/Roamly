@@ -1,0 +1,122 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b0d0f;
+    color: white;
+}
+
+.navbar {
+    height: 80px;
+    padding: 0 8%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #272b2f;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #00b4a0;
+}
+
+.navbar a {
+    color: #a5abad;
+    text-decoration: none;
+}
+
+.explore-container {
+    padding: 90px 10%;
+}
+
+.eyebrow {
+    color: #00b4a0;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.explore-heading h1 {
+    font-size: 48px;
+    margin: 20px 0;
+}
+
+.explore-heading h1 span {
+    color: #00b4a0;
+}
+
+.explore-heading > p:last-child {
+    color: #929a9f;
+}
+
+.location-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 55px;
+}
+
+.location-card {
+    padding: 35px;
+    background: #15191c;
+    border: 1px solid #30383d;
+    border-radius: 16px;
+}
+
+.location-card h2 {
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+.location-card p {
+    color: #929a9f;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.location-card button {
+    padding: 13px 20px;
+    background: #00b4a0;
+    color: #07110f;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 13px;
+    background: #0b0d0f;
+    border: 1px solid #343a3f;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: #00b4a0;
+}
+
+#location-status {
+    margin-top: 25px;
+    color: #00b4a0;
+}

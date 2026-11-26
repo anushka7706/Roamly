@@ -1,0 +1,150 @@
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* PAGE */
+body {
+    font-family: Arial, sans-serif;
+    background: #0b0d0f;
+    color: #ffffff;
+}
+
+/* NAVIGATION BAR */
+.navbar {
+    width: 100%;
+    height: 85px;
+    padding: 0 8%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #0b0d0f;
+    border-bottom: 1px solid #22272b;
+}
+
+/* LOGO */
+.logo {
+    font-size: 27px;
+    font-weight: bold;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #00b4a0;
+}
+
+/* NAVIGATION LINKS */
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #a5abad;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #00b4a0;
+}
+
+/* SIGN IN BUTTON */
+.login-btn {
+    text-decoration: none;
+    color: white;
+    border: 1px solid #3b4247;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #00b4a0;
+    border-color: #00b4a0;
+    color: #0b0d0f;
+}
+
+/* HERO SECTION */
+.hero {
+    min-height: calc(100vh - 85px);
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 10%;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(11, 13, 15, 0.95),
+            rgba(11, 13, 15, 0.55),
+            rgba(11, 13, 15, 0.15)
+        ),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b")
+        center/cover no-repeat;
+}
+
+/* HERO CONTENT */
+.hero-content {
+    max-width: 650px;
+}
+
+.eyebrow {
+    color: #00b4a0;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: 76px;
+    line-height: 1.08;
+    letter-spacing: -3px;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #00b4a0;
+}
+
+.hero-description {
+    color: #b5bbbf;
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 35px;
+}
+
+/* EXPLORE BUTTON */
+.explore-btn {
+    padding: 16px 28px;
+    background: #00b4a0;
+    color: #07110f;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.explore-btn:hover {
+    background: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 180, 160, 0.2);
+}
+

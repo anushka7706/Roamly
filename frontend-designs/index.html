@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Roamly | Welcome</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <div class="logo">
+                Roamly
+            </div>
+
+           
+<div class="welcome-text" id="welcome-text">
+    <h1 id="form-title">Welcome back.</h1>
+    <p id="form-subtitle">Sign in and get back to exploring.</p>
+</div>
+
+<!-- LOGIN FORM -->
+<form class="login-form" id="login-form">
+
+    <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email"
+            placeholder="you@example.com" required>
+    </div>
+
+    <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password"
+            placeholder="Enter your password" required>
+    </div>
+
+    <button type="submit" class="login-button">
+        Sign in
+    </button>
+
+</form>
+
+<!-- SIGN UP FORM -->
+<form class="login-form" id="signup-form" hidden>
+
+    <div class="input-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname"
+            placeholder="Your name" required>
+    </div>
+
+    <div class="input-group">
+        <label for="signup-email">Email</label>
+        <input type="email" id="signup-email"
+            placeholder="you@example.com" required>
+    </div>
+
+    <div class="input-group">
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password"
+            placeholder="Create a password" required>
+    </div>
+
+    <button type="submit" class="login-button">
+        Create account
+    </button>
+
+</form>
+
+<p class="signup-text" id="switch-text">
+    Don't have an account?
+    <a href="#" id="switch-link">Create one</a>
+</p>
+         <p id="auth-message"></p>
+   
+        </section>
+
+    </main>
+
+<script type="module">
+
+    // Import Firebase authentication
+    import { auth } from "../firebase-config.js";
+
+    import {
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        updateProfile
+    } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+
+    // Get the login and signup forms
+    const loginForm = document.getElementById("login-form");
+    const signupForm = document.getElementById("signup-form");
+
+    const formTitle = document.getElementById("form-title");
+    const formSubtitle = document.getElementById("form-subtitle");
+
+    const switchText = document.getElementById("switch-text");
+    const authMessage = document.getElementById("auth-message");
+
+
+    // Switch between login and signup forms
+    switchText.addEventListener("click", function(event) {
+
+        if (event.target.tagName !== "A") return;
+
+        event.preventDefault();
+
+        const isLoginVisible = !loginForm.hidden;
+
+        loginForm.hidden = isLoginVisible;
+        signupForm.hidden = !isLoginVisible;
+
+        authMessage.textContent = "";
+
+        if (isLoginVisible) {
+
+            formTitle.innerText = "Create account.";
+            formSubtitle.innerText =
+                "Start your next adventure with us.";
+
+            switchText.innerHTML =
+                'Already have an account? <a href="#">Sign in</a>';
+
+        } else {
+
+            formTitle.innerText = "Welcome back.";
+            formSubtitle.innerText =
+                "Sign in and get back to exploring.";
+
+            switchText.innerHTML =
+                'Don\'t have an account? <a href="#">Create one</a>';
+
+        }
+
+    });
+
+
+    // LOGIN: Run when the user clicks Sign in
+    loginForm.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+
+        const password = document.getElementById("password").value;
+
+        authMessage.textContent = "Signing in...";
+
+        try {
+
+            // Check the user's email and password
+            await signInWithEmailAndPassword(auth, email, password);
+
+            authMessage.textContent = "Login successful!";
+
+            // We will connect your home page next
+
+        } catch (error) {
+
+            authMessage.textContent =
+                "Login failed. Please check your email and password.";
+
+            console.error(error);
+
+        }
+
+    });
+
+
+    // SIGNUP: Run when the user clicks Create account
+    signupForm.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const fullname = document.getElementById("fullname").value.trim();
+
+        const email = document.getElementById("signup-email").value.trim();
+
+        const password = document.getElementById("signup-password").value;
+
+        authMessage.textContent = "Creating your account...";
+
+        try {
+
+            // Create a new account in Firebase
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            // Save the user's name in their Firebase profile
+            await updateProfile(userCredential.user, {
+                displayName: fullname
+            });
+
+            authMessage.textContent =
+                "Account created successfully!";
+
+            console.log("New user:", userCredential.user.email);
+
+        } catch (error) {
+
+            authMessage.textContent =
+                "Signup failed. Please try again.";
+
+            console.error(error);
+
+        }
+
+    });
+
+
+    
+</script>
+
+</body>
+
+</html>

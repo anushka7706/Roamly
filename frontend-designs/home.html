@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Roamly | Explore the World</title>
+
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo">ROAMLY<span>.</span></div>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="explore.html">Explore</a>
+            <a href="#">Discover</a>
+            <a href="#">About</a>
+        </div>
+
+        <a href="index.html" class="login-btn">Sign In</a>
+
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="eyebrow">THE WORLD IS WAITING</p>
+
+            <h1>
+                Don't just travel.<br>
+                <span>Experience.</span>
+            </h1>
+
+            <p class="hero-description">
+                Discover extraordinary places, find hidden gems
+                and create journeys worth remembering.
+            </p>
+
+            <a href="explore.html" class="explore-btn">
+            Start Exploring →
+            </a>
+
+        </div>
+
+    </section>
+
+<!-- LOCATION DISCOVERY SECTION -->
+
+
+<script>
+    const exploreButton = document.getElementById("explore-btn");
+
+    exploreButton.addEventListener("click", function() {
+        document.getElementById("discovery-section").scrollIntoView({
+            behavior: "smooth"
+        });
+    });
+</script>
+</body>
+
+</html>

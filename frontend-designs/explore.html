@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Roamly | Explore Places</title>
+
+    <link rel="stylesheet" href="explore.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">ROAMLY<span>.</span></div>
+
+        <a href="home.html">← Back to Home</a>
+    </nav>
+
+    <main class="explore-container">
+
+        <div class="explore-heading">
+            
+            <h1>Where do you want to <span>explore?</span></h1>
+        </div>
+
+        <div class="location-options">
+
+            <div class="location-card">
+                <h2>📍 Use current location</h2>
+                <p>Discover attractions near your current position.</p>
+
+                <button id="location-btn">
+                    Find places near me
+                </button>
+            </div>
+
+            <div class="location-card">
+                <h2>🔎 Search a location</h2>
+                <p>Explore places in any city or area.</p>
+
+                <div class="search-box">
+                    <input
+                        type="text"
+                        id="city-input"
+                        placeholder="Enter city or location"
+                    >
+
+                    <button id="search-btn">Search</button>
+                </div>
+            </div>
+
+        </div>
+
+        <p id="location-status"></p>
+
+    </main>
+
+</body>
+</html>
