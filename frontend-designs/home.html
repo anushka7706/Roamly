@@ -25,8 +25,17 @@
             <a href="#">About</a>
         </div>
 
-        <a href="index.html" class="login-btn">Sign In</a>
+        <div class="profile-menu">
+            <button id="profile-btn" class="login-btn" type="button">
+            Profile
+            </button>
 
+        <div id="profile-dropdown" class="profile-dropdown" hidden>
+                <p id="profile-name"></p>
+                <p id="profile-email"></p>
+                <button id="logout-btn" type="button">Log Out</button>
+        </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -57,15 +66,50 @@
 <!-- LOCATION DISCOVERY SECTION -->
 
 
-<script>
-    const exploreButton = document.getElementById("explore-btn");
 
-    exploreButton.addEventListener("click", function() {
-        document.getElementById("discovery-section").scrollIntoView({
-            behavior: "smooth"
+    <script type="module">
+        import { auth } from "../firebase-config.js";
+        import {
+           onAuthStateChanged,
+           signOut
+        } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+        const profileButton = document.getElementById("profile-btn");
+        const dropdown = document.getElementById("profile-dropdown");
+        const nameText = document.getElementById("profile-name");
+        const emailText = document.getElementById("profile-email");
+        const logoutButton = document.getElementById("logout-btn");
+
+         // Show the signed-in user's details
+         onAuthStateChanged(auth, (user) => {
+            if (user) {
+               profileButton.textContent = "Profile";
+               nameText.textContent = user.displayName || "Your profile";
+               emailText.textContent = user.email || "";
+            } else {
+               // If nobody is signed in, send them to the sign-in page
+               window.location.href = "index.html";
+            }
         });
+
+        // Open or close the profile dropdown
+         profileButton.addEventListener("click", () => {
+             dropdown.hidden = !dropdown.hidden;
+        });
+
+        // Sign out
+        logoutButton.addEventListener("click", async () => {
+           try {
+            await signOut(auth);
+            window.location.href = "index.html";
+           } catch (error) {
+            console.error("Logout failed:", error);
+           }
     });
+
 </script>
+    
+
 </body>
 
 </html>
