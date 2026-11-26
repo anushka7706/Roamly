@@ -147,4 +147,60 @@ body {
     transform: translateY(-4px);
     box-shadow: 0 10px 25px rgba(0, 180, 160, 0.2);
 }
+/* Profile Dropdown */
+.profile-menu {
+    position: relative;
+}
+
+.profile-menu .login-btn {
+    cursor: pointer;
+    border: none;
+    font: inherit;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 250px;
+    padding: 20px;
+    background: white;
+    color: #222;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.profile-dropdown[hidden] {
+    display: none !important;
+}
+
+#profile-name {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#profile-email {
+    font-size: 13px;
+    color: #777;
+    overflow-wrap: anywhere;
+    margin-bottom: 18px;
+}
+
+#logout-btn {
+    width: 100%;
+    padding: 10px;
+    background: #222;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#logout-btn:hover {
+    background: #444;
+}
+
 
